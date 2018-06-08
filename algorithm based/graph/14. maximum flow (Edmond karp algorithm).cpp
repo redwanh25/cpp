@@ -10,7 +10,7 @@ using namespace std;
 int residual[100][100];
 int vis[100];
 int parent[100];
-int nd, eg, wt, src, dst, Max, Min = INT_MAX;
+int nd, eg, wt, src, dst;
 
 bool BFS()
 {
@@ -21,7 +21,7 @@ bool BFS()
     while(!q.empty()){
         int u = q.front();
         q.pop();
-        for(int v = Min; v <= Max; v++){
+        for(int v = 0; v < nd; v++){
             if(vis[v] == 0 && residual[u][v] > 0){
                 q.push(v);
                 parent[v] = u;
@@ -60,8 +60,6 @@ int main()
     cin >> nd >> eg;
     for(int i = 0; i < eg; i++){
         cin >> a >> b >> wt;
-        Min = min(Min, min(a, b));
-        Max = max(Max, max(a, b));
         residual[a][b] = wt;    // create adjacency matrix
     }
     cin >> src >> dst;
